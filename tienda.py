@@ -4,7 +4,7 @@ def calcular_precio(precio, descuento):
 	return total
 
 def calcular_iva(precio):
-	return precio * 1.20
+	return precio * 1.16
 
 def validar_descuento(descuento):
 	if descuento < 0 or descuento >= 100:
