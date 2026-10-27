@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  pruebas:
+  pruebas-unitarias:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,6 +24,52 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Ejecutar pruebas
+      - name: Ejecutar pruebas unitarias
         run: |
-          python -m pytest -v
+          python -m pytest test_tienda.py -v
+
+  pruebas-integracion:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Ejecutar pruebas de integracion
+        run: |
+          python -m pytest test_integration.py -v
+
+  pruebas-sistema:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Ejecutar pruebas de sistema
+        run: |
+          python -m pytest test_system.py -v
+
+      - name: Ejecutar main.py
+        run: |
+          python main.py
