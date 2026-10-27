@@ -4,7 +4,7 @@ from tienda import calcular_precio, calcular_iva, validar_descuento
 def procesar_venta(precio_base, descuento):
     try:
         validar_descuento(descuento)
-        precio_con_descuento = calcular_precio(descuento, precio_base)
+        precio_con_descuento = calcular_precio(precio_base, descuento)
         precio_final = calcular_iva(precio_con_descuento)
         return {"exito": True, "precio_final": precio_final}
     except ValueError as e:
